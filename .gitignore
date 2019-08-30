@@ -30,3 +30,13 @@
 *.exe
 *.out
 *.app
+
+#debugs
+*.pdb
+*.idb
+*.tlog
+_2048_in_C/.vs/_2048_in_C/v16/.suo
+*.opendb
+_2048_in_C/.vs/_2048_in_C/v16/.suo
+*.ipch
+*.tlog
