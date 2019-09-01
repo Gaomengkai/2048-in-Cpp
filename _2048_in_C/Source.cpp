@@ -20,11 +20,11 @@ const int RIGHT = 4;
 int main()
 {
 	Game Game1;
-	Game1.init();
+	//Game1.init();
 	int i = 0;
 	Game1.spaceCheck();
 	Game1.append();
-	Game1.show();
+	Game1.show();//init
 	char choice, ch2;
 	for (i = 0; i < 100000; i++)
 	{

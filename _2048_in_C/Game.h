@@ -16,10 +16,9 @@ protected:
 	int tempM[4];//to send data to ori_swpie()
 	int spaceLength = 0;//as the name says
 	int score = 0;//as the name says
-	bool dead = false;//as the name says
 
 public:
-	void init()
+	Game()
 	{
 		int i = 0;
 		int j;
@@ -31,6 +30,7 @@ public:
 				nextM[i][j] = 0;
 			}
 			tempM[i] = 0;
+			finalM[i] = 0;
 		}
 	}
 	void spaceCheck()
@@ -217,10 +217,34 @@ public:
 		{
 			for (int j = 0; j < 4; j++)
 			{
-				if (M[i][j] != nextM[i][j]) { return true; }
+				if (M[i][j] != nextM[i][j])
+				{
+					//setDead(false);
+					return true; 
+				}
 			}
 		}
+		//setDead(true);
 		return false;
+	}
+	bool checkIsDead()
+	{
+		l_swipe();
+		if (!isSwipeValid())
+		{
+			r_swipe();
+			if (!isSwipeValid())
+			{
+				u_swipe();
+				if (!isSwipeValid())
+				{
+					d_swipe();
+					if (!isSwipeValid())
+						return false;
+				}
+			}
+		}
+		return true;
 	}
 	void update()
 	{
@@ -233,10 +257,12 @@ public:
 			}
 		}
 	}
-	void setDead(bool value) { dead = value; };
-	bool getDead() { return dead; };
 	bool swipe(int type)//1Up 2Left 3Down 4Right
 	{
+		if (!checkIsDead()) {
+			printf("Dead\n");
+			return false;
+		}
 		switch(type)
 		{
 		case 1:
@@ -250,6 +276,7 @@ public:
 		default:
 			return false;
 		}//swipe
+		
 		if (!isSwipeValid()) { return false; }
 #ifndef DEBUG
 		system("cls");
