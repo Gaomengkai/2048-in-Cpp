@@ -9,12 +9,14 @@
 class Game
 {
 protected:
-	int M[4][4];
-	int space[16][2];
-	int finalM[4];
-	int tempM[4];
-	int spaceLength = 0;
-	int score = 0;
+	int M[4][4];//Main Matrix shown for players
+	int nextM[4][4];//to judge whether swipe is valid
+	int space[16][2];//to storage the status of space
+	int finalM[4];//to storage after ori_swipe() data
+	int tempM[4];//to send data to ori_swpie()
+	int spaceLength = 0;//as the name says
+	int score = 0;//as the name says
+	bool dead = false;//as the name says
 
 public:
 	void init()
@@ -26,11 +28,11 @@ public:
 			for (j = 0; j < 4; j++)
 			{
 				M[i][j] = 0;
+				nextM[i][j] = 0;
 			}
 			tempM[i] = 0;
 		}
 	}
-
 	void spaceCheck()
 	{
 		int i = 0;
@@ -49,8 +51,7 @@ public:
 			}
 		}
 	}
-
-	void append()
+    void append()
 	{
 		time_t t;
 		srand((unsigned)time(&t));
@@ -125,7 +126,6 @@ public:
 		printf("\n\n");
 #endif
 	}
-
 	void show()
 	{
 		int i;
@@ -147,7 +147,6 @@ public:
 		}
 		printf("score=%d", score);
 	}
-
 	void l_swipe()
 	{
 		int i, j;
@@ -160,11 +159,10 @@ public:
 			oriSwipe();
 			for (j = 0; j < 4; j++)
 			{
-				M[i][j] = finalM[j];
+				nextM[i][j] = finalM[j];
 			}
 		}
 	}
-
 	void r_swipe()
 	{
 		int i, j;
@@ -177,11 +175,10 @@ public:
 			oriSwipe();
 			for (j = 0; j < 4; j++)
 			{
-				M[i][3 - j] = finalM[j];
+				nextM[i][3 - j] = finalM[j];
 			}
 		}
 	}
-
 	void u_swipe()
 	{
 		int i, j;
@@ -194,11 +191,10 @@ public:
 			oriSwipe();
 			for (i = 0; i < 4; i++)
 			{
-				M[i][j] = finalM[i];
+				nextM[i][j] = finalM[i];
 			}
 		}
 	}
-
 	void d_swipe()
 	{
 		int i, j;
@@ -211,9 +207,57 @@ public:
 			oriSwipe();
 			for (i = 0; i < 4; i++)
 			{
-				M[3 - i][j] = finalM[i];
+				nextM[3 - i][j] = finalM[i];
 			}
 		}
 	}
+	bool isSwipeValid()
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				if (M[i][j] != nextM[i][j]) { return true; }
+			}
+		}
+		return false;
+	}
+	void update()
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				M[i][j] = nextM[i][j];
+				nextM[i][j] = 0;
+			}
+		}
+	}
+	void setDead(bool value) { dead = value; };
+	bool getDead() { return dead; };
+	bool swipe(int type)//1Up 2Left 3Down 4Right
+	{
+		switch(type)
+		{
+		case 1:
+			u_swipe(); break;
+		case 2:
+			l_swipe(); break;
+		case 3:
+			d_swipe(); break;
+		case 4:
+			r_swipe(); break;
+		default:
+			return false;
+		}//swipe
+		if (!isSwipeValid()) { return false; }
+#ifndef DEBUG
+		system("cls");
+#endif
+		update();
+		spaceCheck();
+		append();
+		show();
+		return true;
+	}
 };
-

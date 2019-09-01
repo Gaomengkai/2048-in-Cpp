@@ -40,3 +40,8 @@ _2048_in_C/.vs/_2048_in_C/v16/.suo
 _2048_in_C/.vs/_2048_in_C/v16/.suo
 *.ipch
 *.tlog
+*.idb
+*.pdb
+*.db
+_2048_in_C/.vs/_2048_in_C/v16/.suo
+*.ilk
