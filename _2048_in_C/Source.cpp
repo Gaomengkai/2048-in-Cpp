@@ -5,7 +5,7 @@
 #include <conio.h>
 #include "Game.h"
 #ifndef DEBUG
-#define DEBUG
+//#define DEBUG
 #endif
 
 const int UP = 1;
@@ -48,13 +48,13 @@ int main()
 			switch (ch2) 
 			{
 			case 0x48:
-				Game1.u_swipe(); system("cls"); Game1.spaceCheck(); Game1.append(); Game1.show(); break;
+			    Game1.swipe(UP); break;			
 			case 0x4b:
-				Game1.l_swipe(); system("cls"); Game1.spaceCheck(); Game1.append(); Game1.show(); break;
+				Game1.swipe(LEFT); break;
 			case 0x4d:
-				Game1.r_swipe(); system("cls"); Game1.spaceCheck(); Game1.append(); Game1.show(); break;
+				Game1.swipe(RIGHT); break;
 			case 0x50:
-				Game1.d_swipe(); system("cls"); Game1.spaceCheck(); Game1.append(); Game1.show(); break;
+				Game1.swipe(DOWN);  break;
 			default:
 #ifdef DEBUG
 				printf(" 0x%x", choice);
