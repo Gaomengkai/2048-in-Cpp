@@ -9,16 +9,15 @@
 class Game
 {
 protected:
-	int M[4][4];//Main Matrix shown for players
-	int nextM[4][4];//to judge whether swipe is valid
-	int space[16][2];//to storage the status of space
-	int finalM[4];//to storage after ori_swipe() data
-	int tempM[4];//to send data to ori_swpie()
+	int M[4][4] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };//Main Matrix shown for players
+	int nextM[4][4] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };//to judge whether swipe is valid
+	int space[16][2] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };//to storage the status of space
+	int finalM[4] = { 0,0,0,0 };//to storage after ori_swipe() data
+	int tempM[4] = { 0,0,0,0 };//to send data to ori_swpie()
 	int spaceLength = 0;//as the name says
 	int score = 0;//as the name says
 
 public:
-	Game();
 	void spaceCheck();
 	void append();
 

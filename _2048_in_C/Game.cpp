@@ -1,20 +1,5 @@
 #include "Game.h"
 
-Game::Game()
-{
-	int i = 0;
-	int j;
-	for (i = 0; i < 4; i++)
-	{
-		for (j = 0; j < 4; j++)
-		{
-			Game::M[i][j] = 0;
-			Game::nextM[i][j] = 0;
-		}
-		Game::tempM[i] = 0;
-		Game::finalM[i] = 0;
-	}
-}
 void Game::spaceCheck()
 {
 	int i = 0;
